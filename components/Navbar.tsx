@@ -2,7 +2,8 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { GoogleLogin, GoogleLogout} from 'react-google-login'
+// import { GoogleLogin, GoogleLogout} from 'react-google-login' // to be deprecated in march 2023
+
 import { AiOutlineLogout } from 'react-icons/ai'
 import { BiSearch } from 'react-icons/bi'
 import { IoMdAdd } from 'react-icons/io'
