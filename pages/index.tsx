@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import axios from 'axios'
 
 export default function Home() {
   return (
@@ -13,4 +14,14 @@ export default function Home() {
       </h1>
     </div>
   )
+}
+
+export const getServerSideProps = async () => {
+  const response = await axios.get(`http://localhost:3000/api/post`);
+
+  console.log(response.data.name);
+
+  return {
+    props: {}
+  }
 }
