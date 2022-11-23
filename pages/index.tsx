@@ -2,13 +2,15 @@ import Head from 'next/head'
 import axios from 'axios'
 
 import { Video } from '../types';
+import VideoCard from '../components/VideoCard';
+import NoResults from '../components/NoResults';
 
 interface IProps {
   videos: Video[]
 }
 
 export default function Home({ videos }: IProps) {
-  console.log(videos);
+  // console.log(videos);
 
   return (
     <div>
@@ -17,9 +19,16 @@ export default function Home({ videos }: IProps) {
         <meta name="description" content="Tiktok Clone" />
         <link rel="icon" href="/tiktok.png" />
       </Head>
-      <h1 className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+
+      <div className="flex flex-col gap-10 videos h-full">
+        {videos.length ? (
+          videos.map((video: Video) => (
+            <VideoCard post={video} key={video._id} />
+          ))
+        ) : (
+          <NoResults text={'No Videos'} />
+        )}
+      </div>
     </div>
   )
 }
