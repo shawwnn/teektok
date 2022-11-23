@@ -14,11 +14,13 @@ interface IProps {
 }
 
 const VideoCard: NextPage<IProps> = ({ post }) => {
-  // const [isHover, setIsHover] = useState(false)
+  const [isHover, setIsHover] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isVideoMuted, setIsVideoMuted] = useState(false)
 
   return (
     <div className="flex flex-col border-b-2 border-gray-200 pb-6">
-      <div className="test">
+      <div>
         <div className="flex gap-3 p-2 cursor-pointer font-semibold">
           <div className="md:w-16 md:h-16 w-10 h-10">
             <Link href="/">
@@ -51,8 +53,8 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
 
       <div className="lg:ml-20 flex gap-4 relative">
         <div 
-          // onMouseEnter={() => setIsHover}
-          // onMouseLeave={() => setIsHover(false)}
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
           className="rounded-3xl"
         >
           <Link href="/">
@@ -64,11 +66,29 @@ const VideoCard: NextPage<IProps> = ({ post }) => {
 
             </video>
           </Link>
-          {/* {isHover && (
+          {isHover && (
             <div>
-              test
+              {isPlaying ? (
+                <button>
+                  <BsFillPauseFill className="text-black text-2xl lg:text-4xl" />
+                </button>
+              ) : (
+                <button>
+                  <BsFillPlayFill className="text-black text-2xl lg:text-4xl" />
+                </button>
+              )}
+
+              {isVideoMuted ? (
+                <button>
+                  <HiVolumeOff className="text-black text-2xl lg:text-4xl" />
+                </button>
+              ) : (
+                <button>
+                  <HiVolumeUp className="text-black text-2xl lg:text-4xl" />
+                </button>
+              )}
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </div>
