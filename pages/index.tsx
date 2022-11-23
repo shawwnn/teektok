@@ -1,7 +1,13 @@
 import Head from 'next/head'
 import axios from 'axios'
 
-export default function Home() {
+// interface IProps {
+//   videos: 
+// }
+
+export default function Home({ videos }) {
+  console.log(videos);
+
   return (
     <div>
       <Head>
@@ -17,11 +23,13 @@ export default function Home() {
 }
 
 export const getServerSideProps = async () => {
-  const response = await axios.get(`http://localhost:3000/api/post`);
+  const { data } = await axios.get(`http://localhost:3000/api/post`);
 
-  console.log(response.data.name);
+  // console.log(response.data.name);
 
   return {
-    props: {}
+    props: {
+      videos: data
+    }
   }
 }
