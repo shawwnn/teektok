@@ -1,11 +1,13 @@
 import Head from 'next/head'
 import axios from 'axios'
 
-// interface IProps {
-//   videos: 
-// }
+import { Video } from '../types';
 
-export default function Home({ videos }) {
+interface IProps {
+  videos: Video[]
+}
+
+export default function Home({ videos }: IProps) {
   console.log(videos);
 
   return (
