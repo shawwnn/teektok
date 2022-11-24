@@ -9,10 +9,11 @@ import { client } from '../utils/client'
 
 const Upload = () => {
 	const [isLoading, setIsLoading] = useState(false)
+	const [videoAsset, setVideoAsset] = useState()
 
   return (
-		<div className="flex w-full h-full border-black- border-[1px]">
-			<div className="bg-white rounded-lg border-[1px]">
+		<div className="flex w-full h-full border-black">
+			<div className="bg-white rounded-lg">
 				<div>
 					<div>
 						<p className="text-2xl font-bold">Upload Video</p>
@@ -23,7 +24,36 @@ const Upload = () => {
 							<p>Uploading...</p>
 						) : (
 							<div>
+								{videoAsset ? (
+									<div>
+
+									</div>
+								) : (
+									<label htmlFor="" className="cursor-pointer">
+										<div className="flex flex-col items-center justify-center h-full">
+											<div className="flex flex-col items-center justify-center">
+												<p className="font-bold text-xl">
+													<FaCloudDownloadAlt 
+														className="text-gray-300 text-6xl"
+													/>
+												</p>
+												<p className="text-xl font-semibold">
+													Upload Video
+												</p>
+											</div>
+											<p className='text-gray-400 text-center mt-10 text-sm leading-7'>
+												MP4 or WebM or OGG <br />
+												720x1280 or higher <br />
+												Up to 10 minutes <br />
+												Less than 2GB
+											</p>
+											<p className="bg-[#F51997] text-center mt-10 rounded text-white text-md font-medium p-2 w-52 outline-none">
+												Select File
+											</p> 
 								
+										</div>
+									</label>
+								)}
 							</div>
 						)}
 					</div>
