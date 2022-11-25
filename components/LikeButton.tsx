@@ -6,13 +6,20 @@ import useAuthStore from '../store/authStore' // use for detecting who has liked
 interface IProps {
 	handleLike: () => void;
 	handleDislike: () => void;
+	likes: any[];
 }
 
-const LikeButton = ({ handleLike, handleDislike }: IProps) => {
-	const [hasAlreadyLiked, setHasAlreadyLiked] = useState(true)
-	const { userProfile } = useAuthStore();
+const LikeButton = ({ handleLike, handleDislike, likes}: IProps) => {
+	const [hasAlreadyLiked, setHasAlreadyLiked] = useState(false)
+	const { userProfile }: any = useAuthStore();
+	const filterLikes = likes?.filter((item) => item._ref === userProfile?._id)
 
-	
+	useEffect(() => {
+		//filterLikes = has the user already like the post?
+		if(filterLikes?.length > 0) {
+			setHasAlreadyLiked(true);
+		} else setHasAlreadyLiked(false);
+	}, [filterLikes, likes])
 
   return (
 		<div className="gap-6">
@@ -26,7 +33,7 @@ const LikeButton = ({ handleLike, handleDislike }: IProps) => {
 					<MdFavorite className="text-lg md:text-2xl" />
 				</div>
 				)}
-				<p className="text-md font-semibold">likes?.length | 0</p>
+				<p className="text-md font-semibold">{likes?.length | 0}</p>
 
 
 			</div>
