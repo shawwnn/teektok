@@ -15,7 +15,9 @@ interface IProps {
 }
 
 const Detail = ({ postDetails } : IProps) => {
-	
+	const [post, setPost] = useState(postDetails);
+
+	const videoRef = useRef(null);
 
   return (
     <div>Detail</div>
