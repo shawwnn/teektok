@@ -10,6 +10,9 @@ import axios from 'axios'
 import { BASE_URL } from '../../utils'
 import { Video } from '../../types'
 import useAuthStore from '../../store/authStore'
+import LikeButton from '../../components/LikeButton'
+import Comments from '../../components/Comments'
+import { GiHandcuffed } from 'react-icons/gi'
 
 
 interface IProps {
@@ -22,7 +25,7 @@ const Detail = ({ postDetails } : IProps) => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isVideoMuted, setIsVideoMuted] = useState(false);
 	const router = useRouter();
-	// const { userProfile } = useAuthStore();
+	const { userProfile }: any = useAuthStore();
 
 	const onVideoClick = () => {
 		if(isPlaying) {
@@ -40,6 +43,16 @@ const Detail = ({ postDetails } : IProps) => {
     }
 
   }, [post, isVideoMuted]);
+
+	const handleLike = async (like: boolean) => {
+		if(userProfile) {
+			const response = await axios.put(`${BASE_URL}/api/like`, {
+				userId: userProfile._id,
+				postId: post._id,
+				like
+			})
+		}
+	}
 
 	if(!post) return null; // to check if really a video exists
 
@@ -118,8 +131,16 @@ const Detail = ({ postDetails } : IProps) => {
 					</div>
 					<p className='px-10 text-lg text-gray-600'>{post.caption}</p>
 					<div className="mt-10 px-10">
-						{}
+						{userProfile && (
+							<LikeButton 
+								handleLike={() => handleLike(true)}
+								handleDislike={() => handleLike(false)}
+							/>
+						)}
 					</div>
+					<Comments
+					
+					/>
 				</div>
 			</div>
 		</div>
