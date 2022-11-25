@@ -84,7 +84,7 @@ const Upload = () => {
 						<p className="text-2xl font-bold">Upload Video</p>
 						<p className="text-md text-gray-400 mt-1">Post a video to your account</p>
 					</div>
-					<div className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[260px] h-[460px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100">
+					<div className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[260px] h-5/6 p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100">
 						{isLoading ? (
 							<p>Uploading...</p>
 						) : (
@@ -95,7 +95,7 @@ const Upload = () => {
 											src={videoAsset.url}
 											loop
 											controls
-											className="rounded-xl h-[450px] mt-16 bg-black"
+											className="rounded-xl h-[450px] mt-0 bg-black"
 										>
 
 										</video>
@@ -103,7 +103,7 @@ const Upload = () => {
 								) : (
 									<label 
 										// htmlFor="" 
-										className="cursor-pointer">
+										className="cursor-pointer h-[80vh]">
 										<div className="flex flex-col items-center justify-center h-full">
 											<div className="flex flex-col items-center justify-center">
 												<p className="font-bold text-xl">
