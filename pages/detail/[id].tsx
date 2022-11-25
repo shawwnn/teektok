@@ -18,6 +18,7 @@ const Detail = ({ postDetails } : IProps) => {
 	const [post, setPost] = useState(postDetails);
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const [isPlaying, setIsPlaying] = useState(false);
+	const [isVideoMuted, setIsVideoMuted] = useState(false);
 
 	const onVideoClick = () => {
 		if(isPlaying) {
@@ -28,6 +29,13 @@ const Detail = ({ postDetails } : IProps) => {
       setIsPlaying(true);
     }
 	}
+
+	useEffect(() => {
+    if(post && videoRef?.current) { // this line means to check if we really have the right video uploaded
+      videoRef.current.muted = isVideoMuted;
+    }
+
+  }, [post, isVideoMuted]);
 
 	if(!post) return null; // to check if really a video exists
 
@@ -58,6 +66,18 @@ const Detail = ({ postDetails } : IProps) => {
 							</button>
 						)}
 					</div>
+				</div>
+
+				<div className="absolute bottom-5 lg:bottom-10 right-5 lg:right-10 ">
+					{isVideoMuted ? (
+						<button onClick={() => setIsVideoMuted(false)}>
+							<HiVolumeOff className="text-white text-2xl lg:text-4xl" />
+						</button>
+					) : (
+						<button onClick={() => setIsVideoMuted(true)}>
+							<HiVolumeUp className="text-white text-2xl lg:text-4xl" />
+						</button>
+					)}
 				</div>
 			</div>
 		</div>
