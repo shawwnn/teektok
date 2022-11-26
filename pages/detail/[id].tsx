@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -58,16 +58,20 @@ const Detail = ({ postDetails } : IProps) => {
 		}
 	}
 
-	const addComment = async (e) => {
+	const addComment = async (e: { preventDefault: () => void }) => {
 		e.preventDefault();
 
 		if(userProfile && comment) {
 			setIsPostingComment(true);
 
-			const response = await axios.put(`${BASE_URL}/api/post/${post._id}`,{
+			const { data } = await axios.put(`${BASE_URL}/api/post/${post._id}`,{
 				userId: userProfile._id,
 				comment
 			});
+
+			setPost({ ...post, comments: data.comments });
+			setComment('');
+			setIsPostingComment(false);
 		}
 	}
 

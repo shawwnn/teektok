@@ -18,7 +18,7 @@ interface IComment {
   comment: string;
   length?: number;
   _key: string;
-  postedBy: {_ref: string; _id: string};
+  postedBy: {_ref?: string; _id?: string};
 }
 
 const Comments = ({ comment, setComment, addComment, comments, isPostingComment }: IProps) => {
@@ -40,7 +40,7 @@ const Comments = ({ comment, setComment, addComment, comments, isPostingComment 
           <form onSubmit={addComment} className="flex gap-4">
             <input 
               value={comment}
-              onChange={(e) => setComment(e.target.value.trim())}
+              onChange={(e) => setComment(e.target.value)}
               placeholder="Add Comment..."
               className="bg-primary px-6 py-4 text-md font-medium border-2 w-[250px] md:w-[700px] lg:w-[350px] border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 flex-1 rounded-lg"
             />
